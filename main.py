@@ -108,7 +108,7 @@ def main_menu(users, user):
         elif selection == "2":
             # Filter by Either Title, Publisher, Genre, or Author
             print("\nFilter by Either Title, Publisher, Genre, or Author")
-            # Get User Input on How They Would Like to Filteri
+            # Get User Input on How They Would Like to Filter
             filter_input = input(
                 "Which filter would you like to use? (Title, Publisher, Genre, Author): "
             )
@@ -151,8 +151,7 @@ def main_menu(users, user):
                     "\nUnfortunately we do not have that book right now and cannot add it to your shopping cart."
                 )
             else:
-                # If My Program Does Have Such a Book
-                # Add Book from Their Shopping Cart
+                # If My Program Does Have the Book
                 user["shopping_cart"].append(books[results])
                 # Save User Shopping Cart Preferences
                 save_users(users)
@@ -169,8 +168,7 @@ def main_menu(users, user):
             if results == -1:
                 print("\nYou do not have that book in your shopping cart.")
             else:
-                # If the User Has the Book in Shopping Cart
-                # Remove Book from Their Shopping Cart
+                # If the User Has the Book in their Shopping Cart
                 user["shopping_cart"].pop(results)
                 # Save User Shopping Cart Preferences
                 save_users(users)
@@ -208,6 +206,7 @@ def save_users(users):
 
 # Login Page User Must Proceed Through in order to Access Menu
 def login_page():
+    # Create Users Array that will be Transported to Other Functions Through Parameters
     users = load_users()
     loop = True
     while loop:
