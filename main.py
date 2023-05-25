@@ -18,7 +18,7 @@ def new_book(title, publisher, genre, author):
 
 
 # Few Random Sets of Data About Specific Books
-books.append(new_book("It", "Secker and Warburg", "Horror", "Stephen King"))
+books.append(new_book("It", "Viking", "Horror", "Stephen King"))
 books.append(
     new_book(
         "War and Peace", "The Russian Messenger", "Historical Fiction", "Leo Tolstoy"
@@ -58,14 +58,6 @@ def display_data(anArray):
         print(book["author"])
 
 
-# Linear Search To Find Specific Data
-def linear_search(anArray, key, value):
-    for i in range(len(anArray)):
-        if anArray[i][key].lower() == value.lower():
-            return i
-    return -1
-
-
 # Insertion Sort for Option 3 in Main Menu
 def insertionSort(anArray):
     for i in range(1, len(anArray)):
@@ -82,14 +74,12 @@ def insertionSort(anArray):
     return anArray
 
 
-# Filter Function which Filters by a Certain Criteria Selected by User
-def filter(filter_input, data_input):
-    filter_input = filter_input.lower()
-    for book in books:
-        if book[f"{filter_input}"].lower() == data_input.lower():
-            return book
-    else:
-        return -1
+# Linear Search To Find Specific Data
+def linear_search(anArray, key, value):
+    for i in range(len(anArray)):
+        if anArray[i][key].lower() == value.lower():
+            return i
+    return -1
 
 
 def main_menu(users, user):
@@ -127,7 +117,7 @@ def main_menu(users, user):
             data_input = input("What would you like to filter for?: ")
 
             # Run Filter Program Based on The User Inputs
-            results = filter(filter_input, data_input)
+            results = linear_search(books, filter_input, data_input)
 
             # If The Filter Did Not Find What The User Requested
             if results == -1:
@@ -136,11 +126,9 @@ def main_menu(users, user):
                 )
             # If The Filter Did Find Data the User Requested
             else:
-                # Display Set of Data About the Book
-                print("\n" + results["title"])
-                print(results["publisher"])
-                print(results["genre"])
-                print(results["author"])
+                print("")
+                for x in books[results]:
+                    print(books[results][x])
 
         # Option 3
         elif selection == "3":
@@ -156,7 +144,7 @@ def main_menu(users, user):
             user_input = input(
                 "\nWhich book would you like to add to your shopping cart? "
             )
-            results = filter("title", user_input)
+            results = linear_search(books, "title", user_input)
             # If the My Program Does Not Have the Book
             if results == -1:
                 print(
@@ -165,7 +153,7 @@ def main_menu(users, user):
             else:
                 # If My Program Does Have Such a Book
                 # Add Book from Their Shopping Cart
-                user["shopping_cart"].append(results)
+                user["shopping_cart"].append(books[results])
                 # Save User Shopping Cart Preferences
                 save_users(users)
                 print("\n" + f"{user_input} was added to your cart.")
